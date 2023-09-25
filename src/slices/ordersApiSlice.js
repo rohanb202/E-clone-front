@@ -8,11 +8,13 @@ export const orderApiSlice = apiSlice.injectEndpoints({
         url: ORDERS_URL,
         method: 'POST',
         body: order,
+        mode: 'no-cors',
       }),
     }),
     getOrderDetails: builder.query({
       query: (id) => ({
         url: `${ORDERS_URL}/${id}`,
+        mode: 'no-cors',
       }),
       keepUnusedDataFor: 5,
     }),
@@ -20,29 +22,34 @@ export const orderApiSlice = apiSlice.injectEndpoints({
       query: ({ orderId, details }) => ({
         url: `${ORDERS_URL}/${orderId}/pay`,
         method: 'PUT',
+        mode: 'no-cors',
         body: details,
       }),
     }),
     getPaypalClientId: builder.query({
       query: () => ({
         url: PAYPAL_URL,
+        mode: 'no-cors',
       }),
       keepUnusedDataFor: 5,
     }),
     getMyOrders: builder.query({
       query: () => ({
         url: `${ORDERS_URL}/mine`,
+        mode: 'no-cors',
       }),
       keepUnusedDataFor: 5,
     }),
     getOrders: builder.query({
       query: () => ({
+        mode: 'no-cors',
         url: ORDERS_URL,
       }),
       keepUnusedDataFor: 5,
     }),
     deliverOrder: builder.mutation({
       query: (orderId) => ({
+        mode: 'no-cors',
         url: `${ORDERS_URL}/${orderId}/deliver`,
         method: 'PUT',
       }),

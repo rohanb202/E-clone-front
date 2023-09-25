@@ -6,6 +6,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
     getProducts: builder.query({
       query: ({ keyword, pageNumber }) => ({
         url: PRODUCTS_URL,
+        mode: 'no-cors',
         params: { keyword, pageNumber },
       }),
       keepUnusedDataFor: 5,
@@ -14,12 +15,14 @@ export const productsApiSlice = apiSlice.injectEndpoints({
     getProductDetails: builder.query({
       query: (productId) => ({
         url: `${PRODUCTS_URL}/${productId}`,
+        mode: 'no-cors',
       }),
       keepUnusedDataFor: 5,
     }),
     createProduct: builder.mutation({
       query: () => ({
         url: `${PRODUCTS_URL}`,
+        mode: 'no-cors',
         method: 'POST',
       }),
       invalidatesTags: ['Product'],
@@ -28,6 +31,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       query: (data) => ({
         url: `${PRODUCTS_URL}/${data.productId}`,
         method: 'PUT',
+        mode: 'no-cors',
         body: data,
       }),
       invalidatesTags: ['Products'],
@@ -36,6 +40,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       query: (data) => ({
         url: `/api/upload`,
         method: 'POST',
+        mode: 'no-cors',
         body: data,
       }),
     }),
@@ -43,6 +48,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       query: (productId) => ({
         url: `${PRODUCTS_URL}/${productId}`,
         method: 'DELETE',
+        mode: 'no-cors',
       }),
       providesTags: ['Product'],
     }),
@@ -50,13 +56,15 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       query: (data) => ({
         url: `${PRODUCTS_URL}/${data.productId}/reviews`,
         method: 'POST',
+        mode: 'no-cors',
         body: data,
       }),
       invalidatesTags: ['Product'],
     }),
     getTopProducts: builder.query({
       query: () => `${PRODUCTS_URL}/top`,
-      keepUnusedDataFor: 5,      
+      keepUnusedDataFor: 5,    
+      mode: 'no-cors',  
     }),
   }),
 });

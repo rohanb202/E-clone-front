@@ -8,6 +8,7 @@ import Message from '../components/Message';
 import Paginate from '../components/Paginate';
 import ProductCarousel from '../components/ProductCarousel';
 import Meta from '../components/Meta';
+import { useEffect } from 'react';
 
 const HomeScreen = () => {
   const { pageNumber, keyword } = useParams();
@@ -16,6 +17,19 @@ const HomeScreen = () => {
     keyword,
     pageNumber,
   });
+  useEffect(()=>{
+    async function getProd(){
+      try{
+        const res = await fetch(`https://e-clone-api.vercel.app/api/products`)
+        const data = await res.json()
+        console.log(data);
+      }catch(err){
+        console.log(err);
+      }
+    }
+    getProd();
+    
+  },[]);
   console.log(keyword,pageNumber);
   return (
     <>

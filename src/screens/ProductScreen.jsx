@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,7 +36,19 @@ const ProductScreen = () => {
     dispatch(addToCart({ ...product, qty }));
     navigate('/cart');
   };
-
+  useEffect(()=>{
+    async function getProd(){
+      try{
+        const res = await fetch(`https://e-clone-api.vercel.app/api/products`)
+        const data = await res.json()
+        console.log(data);
+      }catch(err){
+        console.log(err);
+      }
+    }
+    getProd();
+    
+  },[]);
   const {
     data: product,
     isLoading,
